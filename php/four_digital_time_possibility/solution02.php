@@ -3,10 +3,10 @@
 	function timeCal($A, $B, $C, $D) {
     $result = array();
 
-    // AB, AC, AD,
-  	// BA, BC, BD,
-  	// CA, CB, CD,
-  	// DA, BB, BC
+    // AA, AB, AC, AD
+  	// BA, BB, BC, BD
+  	// CA, CB, CC, CD
+  	// DA, DB, DC DD
     $map = array(0, 1, 2, 3);
     $arr = array(
       array($A.$A, $A.$B, $A.$C, $A.$D),
@@ -37,14 +37,21 @@
 
     $result = array_unique($result);
 
+		// usort($result, function($a, $b) {
+  	// 	return new DateTime($a) <=> new DateTime($b);
+		// });
+
+		// php 7.4, Arrow func
+		usort($result, fn($a, $b) => new DateTime($a) <=> new DateTime($b));
+
     print_r($result);
 
     return count($result);
   }
 
-  // echo timeCal(0, 0, 0, 0) . "\n";
-	echo timeCal(1, 8, 3, 2) . "\n";
-	// echo timeCal(2, 3, 3, 2) . "\n";
-	// echo timeCal(6, 2, 4, 7) . "\n";
+  // echo "result: " . timeCal(0, 0, 0, 0) . "\n";
+	echo "result: " . timeCal(1, 8, 3, 2) . "\n";
+	// echo "result: " . timeCal(2, 3, 3, 2) . "\n";
+	// echo "result: " . timeCal(6, 2, 4, 7) . "\n";
 
 ?>
